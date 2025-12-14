@@ -1,0 +1,4 @@
+# Sass və CSS source map faylları
+*.map
+*.scss
+*.css.map
