@@ -2,7 +2,7 @@ $(document).ready(function () {
   const rates = {
     USD: 1.697,
     EUR: 1.9301,
-    RUB: 0.0179, // 100 RUB üçün /100 = 1 RUB
+    RUB: 0.0179,
     AZN: 1,
   };
 
@@ -14,7 +14,6 @@ $(document).ready(function () {
 
   function convertValue(value, from, to) {
     if (!rates[from] || !rates[to]) return 0;
-    // AZN bazası ilə hesablama
     const aznValue = value * rates[from];
     return (aznValue / rates[to]).toFixed(4);
   }
@@ -40,13 +39,11 @@ $(document).ready(function () {
     input1.value = convertValue(val2, select2.val(), select1.val());
   });
 
-  // Button click -> 2-ci blok 1-ci blokla sinxron
   exchange_button.addEventListener("click", () => {
-    // Mövcud seçilmiş dəyərləri götür
+    
     let select_val1 = select1.val();
     let select_val2 = select2.val();
 
-    // Dəyərləri dəyiş
     select1.val(select_val2).trigger("change");
     select2.val(select_val1).trigger("change");
 

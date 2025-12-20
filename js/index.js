@@ -73,7 +73,6 @@ $(document).ready(function () {
           settings: {
             slidesToShow: 1.5,
             slidesToScroll: 1,
-            //  rtl: true, // ✔ yalnız bunu istifadə et
           },
         },
         {
@@ -83,13 +82,6 @@ $(document).ready(function () {
             slidesToScroll: 1,
           },
         },
-        // {
-        //   breakpoint: 550,
-        //   settings: {
-        //     slidesToShow: 1,
-        //     slidesToScroll: 1,
-        //   },
-        // },
       ],
     });
 
@@ -107,7 +99,6 @@ $(document).ready(function () {
     dropdownParent: $(".exchange-select-design2"),
   });
 
-  //   exchange-select buttons end
 });
 
 //
@@ -240,20 +231,7 @@ rangeInput.forEach((element, index) => {
 
 const ranges = document.querySelectorAll(".range-abb");
 
-// ranges.forEach((r) => {
-//   const updateBg = () => {
-//     const min = +r.min || 0;
-//     const max = +r.max || 100;
-//     const val = +r.value;
 
-//     const percent = ((val - min) / (max - min)) * 100;
-
-//     r.style.background = `linear-gradient(to right, #007bff ${percent}%, #ddd ${percent}%)`;
-//   };
-
-//   updateBg();
-//   r.addEventListener("input", updateBg);
-// });
 
 function updateRangeBg(r) {
   const min = +r.min || 0;
@@ -279,15 +257,15 @@ let credit_time = document.getElementById("credit-range-time");
 let credit_percent = document.getElementById("credit-range-percent");
 
 function abbCredit() {
-  // kredit hesablama
+  
 
   let credit_all_amount = document.getElementById("credit-all-amount");
 
   function kreditHesabla(kredit, faiz, muddet) {
-    let r = faiz / 12 / 100; // aylıq faiz
+    let r = faiz / 12 / 100; 
     let A =
       (kredit * (r * Math.pow(1 + r, muddet))) / (Math.pow(1 + r, muddet) - 1);
-    return A.toFixed(2); // aylıq ödəniş
+    return A.toFixed(2); 
   }
 
   credit_all_amount.innerText = kreditHesabla(
@@ -359,7 +337,7 @@ function abbDepozitCredit() {
         break;
 
       default:
-        percent = 0; // uyğun olmayan müddət
+        percent = 0; 
     }
 
     return percent;
@@ -394,7 +372,7 @@ function abbDepozitCredit() {
         break;
 
       default:
-        percent = 0; // uyğun olmayan müddət
+        percent = 0; 
     }
 
     return percent;
@@ -406,19 +384,18 @@ function abbDepozitCredit() {
     months,
     payType = "every-month"
   ) {
-    const r = percent / 100; // faiz %
-    const years = months / 12; // ay → il
+    const r = percent / 100;
+    const years = months / 12; 
 
     let profit = 0;
     let totalAmount = 0;
 
     if (payType === "every-month") {
-      // AYLIQ ÖDƏNİŞ MODELİ
+      
       const monthlyRate = r / 12;
       profit = amount * monthlyRate * months;
-      totalAmount = profit / months; // ABB-də kapitalizasiya yoxdur
+      totalAmount = profit / months; 
     } else if (payType === "every-year") {
-      // İLLİK ÖDƏNİŞ MODELİ
       profit = amount * r * years;
       totalAmount = profit;
     }
@@ -522,7 +499,6 @@ let credit_car_percent_yearly_checkbox = document.querySelectorAll(
 
 function abbCarCredit() {
   function creditCarABB(carPrice, percent, type, months) {
-    // İlkin ödəniş 10%
     let principal = carPrice * ((100 - percent) / 100);
 
     let annualRate;
@@ -544,20 +520,20 @@ function abbCarCredit() {
       annualRate = annualRate + 2;
     }
 
-    // Aylıq faiz
+    
     let monthlyRate = annualRate / 12 / 100;
 
-    // EMI (aylıq ödəniş)
+    
     let emi =
       (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) /
       (Math.pow(1 + monthlyRate, months) - 1);
     let monthlyPayment = Number(emi.toFixed(2));
 
-    // Komissiya
+    
     let commission =
       principal < 400 ? 20 : Number((principal * 0.05).toFixed(2));
 
-    // Ümumi ödəniş
+    
     let totalPayment = Number((monthlyPayment * months).toFixed(2));
 
     return {
@@ -605,25 +581,25 @@ function abbCarCredit() {
   credit_car_percent.innerText = result.annualRate;
 }
 
-//
+
 
 credit_car_range_amount.addEventListener("input", function () {
   abbCarCredit();
 });
 
-//
+
 
 credit_car_range_percent.addEventListener("input", function () {
   abbCarCredit();
 });
 
-//
+
 
 credit_car_range_time.addEventListener("input", function () {
   abbCarCredit();
 });
 
-//
+
 
 let credit_car_range_min_percent = document.getElementById(
   "credit-car-range-min-percent"
@@ -734,63 +710,6 @@ credit_ipoteka_checkbox.forEach((box) => {
   });
 });
 
-//
-// ipoteka credit end
-//
-
-// test big menu
-
-// const t_nav_menu_item = [...document.getElementsByClassName("t-nav-menu-item")];
-// const t_big_menu = document.getElementById("t-big-menu");
-// const t_big_menu_item = document.getElementsByClassName("t-big-menu-item");
-
-// t_nav_menu_item.forEach((item, index) => {
-//   this.addEventListener("mouseover", function (e) {
-//     e.preventDefault();
-//     t_big_menu.classList.add("t-big-menu-open");
-//     console.log("girdi");
-//   });
-//   this.addEventListener("mouseout", function () {
-//     t_big_menu.classList.remove("t-big-menu-open");
-//     console.log("cixdi");
-//   });
-// });
-
-// const navItems = [...document.getElementsByClassName("t-nav-menu-item")];
-// const bigMenu = document.getElementsByClassName("t-big-menu");
-
-// let closeTimer = null;
-
-// // Nav item hover → aç
-// navItems.forEach((item) => {
-//   item.addEventListener("mouseenter", () => {
-//     clearTimeout(closeTimer);
-//     // Açmadan əvvəl menu görünməsini təxirə sal
-//     bigMenu[0].classList.add("t-big-menu-open");
-//     console.log("mouseenter isledi");
-//   });
-// });
-
-// // Mouse hərəkətini izləyirik
-// document.addEventListener("mousemove", (e) => {
-//   const overNav = navItems.some((item) => item.contains(e.target));
-//   const overBig = bigMenu[0].contains(e.target);
-
-//   // Hər ikisində deyilsə → bağla
-//   if (!overNav && !overBig) {
-//     closeTimer = setTimeout(() => {
-//       bigMenu[0].classList.remove("t-big-menu-open");
-//       console.log("overNav overBig isledi");
-//     }, 150); // mouseun həqiqətən kənara çıxması üçün gecikmə
-//   } else {
-//     clearTimeout(closeTimer);
-//   }
-// });
-
-//
-// nav big menu start
-//
-
 const navItems = Array.from(document.querySelectorAll(".t-nav-menu-item"));
 const bigMenu = document.getElementById("t-big-menu");
 
@@ -814,7 +733,6 @@ function openMenu(index) {
   });
 }
 
-// Menu bağlama funksiyası (xaricə çıxanda)
 function scheduleClose() {
   clearTimeout(closeTimer);
   closeTimer = setTimeout(() => {
@@ -830,23 +748,22 @@ navItems.forEach((item, index) => {
   });
 });
 
-// Mouse hərəkətini izləyirik
+
 document.addEventListener("mousemove", (e) => {
-  // Mouse nav item-larının içindədirmi?
+ 
   const overNav = navItems.some((item) => item.contains(e.target));
-  // Mouse big menu içindədirmi?
+  
   const overBig = bigMenu.contains(e.target);
 
-  // Əgər həm nav, həm bigMenu xaricindədirsə → bağla
+  
 
   if (!overNav && !overBig) {
     scheduleClose();
   } else {
-    openMenu(); // hər iki içindədirsə → açıq qalsın
+    openMenu(); 
   }
 });
 
-// mouse enter menu 2
 
 const t_big_menu_item_tabs_nav_item = [
   ...document.getElementsByClassName("t-big-menu-item-tabs-nav-item"),
